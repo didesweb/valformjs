@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Validar formulario con JS</title>
+		<script>
+			function validarFormulario() {
+				var nomForm = document.forms["formulario"]["nombre"].value;
+				if ( nomForm == null || nomForm == "" || nomForm.length == 0  || /^\s+$/.test(nomForm) || !isNaN(nomForm) ) {
+					alert("El campo nombre no puede estar vacio");
+					return false;
+				}
+				var numForm = document.forms["formulario"]["numero"].value;
+				if( isNaN(numForm) || numForm == null || numForm == "" || numForm.length == 0 || /^\s+$/.test(numForm)) {
+					alert("El campo edad no puede estar vacio y solo puede contener numeros");
+					return false;
+				}
+				var optForm = document.forms["formulario"]["sexo"].selectedIndex;
+				if( optForm == null || optForm == 0 ) {
+					alert("Debe seleccionar una opción en el campo 'Sexo'");
+					return false;
+					
+				}	
+				var cdcForm = document.forms["formulario"]["condicion"];
+				if( !cdcForm.checked ) {
+					alert("Debe aceptar las condiciones");
+					return false;
+				}
+				var opcFormUno = document.forms["formulario"]["opcForm1"];
+				var opcFormDos = document.forms["formulario"]["opcForm2"];
+				if ( !opcFormUno.checked & !opcFormDos.checked ) {
+					alert( "Debe seleccionar Telefono o Email" ) ;
+					return false;
+				}else {
+					alert("Validación correcta");
+					return true;
+				}				
+			}
+		</script>
+</head>
+<body>
+	<form name="formulario" onsubmit="return validarFormulario()" method="post">
+		Nombre: 
+		<input type="text" name="nombre">
+		<br><br>
+		Edad: 
+		<input type="text" name="numero">
+		<br><br>
+		Sexo: 
+		<select name="sexo">
+			<option value=""> - Selecciona una opción - </option>
+			<option value="1">Hombre</option>
+			<option value="2">Mujer</option>
+			<option value="3">Otro</option>
+		</select>
+		<br><br>
+		Condiciones de uso:
+		<br>
+		Acepto las condiciones de uso <input type="checkbox" name="condicion">
+		<br><br>
+		Selecciona una opción de contacto:
+		<br>
+		<input type="radio" name="opcForm1" VALUE="Telefono">Telefono
+		<br>
+		<input type="radio" name="opcForm2" VALUE="Email" >Email
+		<br><br>
+		<input type="submit" value="Enviar">
+	</form>
+
+</body>
+</html>
